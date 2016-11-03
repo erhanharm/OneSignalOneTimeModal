@@ -34,11 +34,11 @@ function getCookie(c_name) {
     $(document).ready(function(){ 
 
     var isModalforPushSown = getCookie('onesignal-push-modal-shown') || '';
-    if (isModalforPushSown != 'yes') {
+    if (isModalforPushSown != 'yes') {  // is modal shown before check from cookie ? 
 
-        OneSignal.isPushNotificationsEnabled().then(function(isEnabled) {
+        OneSignal.isPushNotificationsEnabled().then(function(isEnabled) {  //then check if user allow push before ? 
         if (!isEnabled) 
-           $('.harmankaya-opt-in-notification').css('visibility', 'visible');
+           $('.harmankaya-opt-in-notification').css('visibility', 'visible'); //do show modal for first time
         });
     }
 
@@ -51,12 +51,12 @@ function getCookie(c_name) {
         });
         //OK close modal for future 
         $('.harmankaya-opt-in-notification').css('visibility', 'hidden');
-         createCookie('onesignal-push-modal-shown','yes',7);
+         createCookie('onesignal-push-modal-shown','yes',7); //show modal after 7 days later
     }); 
     
     $("#disable-push-notif").click(function(){ 
         $('.harmankaya-opt-in-notification').css('visibility', 'hidden');
-         createCookie('onesignal-push-modal-shown','yes',7);
+         createCookie('onesignal-push-modal-shown','yes',7); //show modal after 7 days later
     }); 
     
 });
@@ -64,3 +64,28 @@ function getCookie(c_name) {
 ...
 .
 .
+<body>
+    ...
+    ..
+    <div class="harmankaya-opt-in-notification" style="top: 0px;visibility: hidden;">
+    <div class="harmankaya-opt-in-notification-inner-container">
+        <div class="harmankaya-opt-in-notification-image-container"><img src="icons/icon.png" class="harmankaya-opt-in-notification-image">
+        </div>
+        <div class="harmankaya-opt-in-notification-text-container">
+            <div class="harmankaya-opt-in-notification-title">Do you want to enable Push Notification?</div>
+            <div class="harmankaya-opt-in-notification-description">This is description area!</div>
+        </div>
+        <div style="clear: both;">
+            <div class="harmankaya-opt-in-notification-button-container">
+                <div id="disable-push-notif" class="harmankaya-opt-in-notification-button harmankaya-opt-in-disallow-button">Later</div>
+                <div id="enable-push-notif" class="harmankaya-opt-in-notification-button harmankaya-opt-in-allow-button">Allow</div>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+</div>
+    ...
+    .
+    .
+    
+</body>
